@@ -1,0 +1,7 @@
+TELEMETRY RPI CNT_INFO LITTLE_ENDIAN "Packet of Counters"
+    # Keyword       Name            BitSize Type    ID  Description         Endianness
+    APPEND_ITEM     sync_marker     32      UINT        "Sync Marker"
+    APPEND_ITEM     packet_length   32      UINT        "Length"
+    APPEND_ID_ITEM  packet_apid     32      UINT    1   "Packet Id"
+    APPEND_ITEM     x_counter       8       UINT        "Counts up by 1"
+    APPEND_ITEM     y_counter       8       UINT        "Counts up by 2"
