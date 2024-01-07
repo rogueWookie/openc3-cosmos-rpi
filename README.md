@@ -31,12 +31,16 @@ A simple cosmos plugin that receives telemetry from a raspberry pi 4.
 # RPI PLUGIN SETUP
 # Clone down my cosmos plugin inside ~/cosmos/cosmos-project/
 > git clone https://github.com/rogueWookie/openc3-cosmos-rpi.git
+> scp openc3-cosmos-rpi/targets/RPI/target_apps/app.py <user>@<ip>:/home/<user>
+
+# START COSMOS & RPI APP
 > ./openc3 run # start cosmos containers
-> google-chrome --app=http://localhost:2900 # open cosmos page
-# load/install gem file, scp over target_app/app.py to RPI, start it
+> google-chrome --app=http://localhost:2900 # create password
+> google-chrome --app=http://localhost:2900/tools/admin # load/install rpi plugin gem
+> ssh <user>@<ip> # log in to rpi execute app <./app.py>
 ```
 
 ## Reminders & Remaining Tasks
 
-1. Edit the .gemspec file fields: name, summary, description, authors, email, and homepage
-1. Update the LICENSE.txt file with your company name
+- Edit the .gemspec file fields: name, summary, description, authors, email, and homepage
+- Add a yocto recipe for pulling down the app.py and installing it
