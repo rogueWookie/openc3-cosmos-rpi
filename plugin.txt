@@ -3,5 +3,5 @@
 VARIABLE rpi_target_name RPI
 
 TARGET RPI <%= rpi_target_name %>
-INTERFACE <%= rpi_target_name %>_INT serial_interface.rb /dev/ttyUSB0 /dev/ttyUSB0 115200 NONE 1 10 nil LENGTH 32 32 8 1 LITTLE_ENDIAN 0 0xDEADBEEF
+INTERFACE <%= rpi_target_name %>_INT serial_interface.rb /dev/ttyUSB0 /dev/ttyUSB0 115200 NONE 1 10 nil LENGTH 32 32 0 1 LITTLE_ENDIAN 0 0xEFBEADDE
   MAP_TARGET <%= rpi_target_name %>

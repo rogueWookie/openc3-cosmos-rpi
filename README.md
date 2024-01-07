@@ -1,66 +1,42 @@
-# OpenC3 COSMOS Plugin
+# RPI Telemetry Tester
 
-See the [OpenC3](https://openc3.com) documentation for all things OpenC3.
+A simple cosmos plugin that receives telemetry from a raspberry pi 4.
 
-Update this comment with your own description.
+## Resources
+
+- [OpenC3 Documentation](https://openc3.com)
+- [Python Library "ctypes"](https://docs.python.org/3/library/ctypes.html)
+- [Python Library "pyserial"](https://pyserial.readthedocs.io/en/latest/)
 
 ## Getting Started
 
+```bash
+# RPI SETUP
+> dmesg -wH # plugin raspberrypi confirm device (e.g. /dev/ttyUSB0) is created
+> ping <ip> # wait for boot complete, then ping rpi for aliveness
+> chmod 666 <device> # (e.g. /dev/ttyUSB0) allows cosmos container access to device
+
+# COSMOS SETUP
+> mkdir ~/cosmos && cd ~/cosmos
+> git clone https://github.com/OpenC3/cosmos-project.git # clone project starter
+> cd cosmos-project/
+
+# Add device fd (e.g. /dev/ttyUSB0) to openc3-operator node in compose.yaml
+    devices:
+        - "/dev/ttyUSB0:/dev/ttyUSB0"
+
+# Comment out demo app in .env file
+    #OPENC3_DEMO=1
+
+# RPI PLUGIN SETUP
+# Clone down my cosmos plugin inside ~/cosmos/cosmos-project/
+> git clone https://github.com/rogueWookie/openc3-cosmos-rpi.git
+> ./openc3 run # start cosmos containers
+> google-chrome --app=http://localhost:2900 # open cosmos page
+# load/install gem file, scp over target_app/app.py to RPI, start it
+```
+
+## Reminders & Remaining Tasks
+
 1. Edit the .gemspec file fields: name, summary, description, authors, email, and homepage
 1. Update the LICENSE.txt file with your company name
-
-## Building non-tool / widget plugins
-
-1. <Path to COSMOS installation>/openc3.sh cli rake build VERSION=X.Y.Z (or openc3.bat for Windows)
-   - VERSION is required
-   - gem file will be built locally
-
-## Building tool / widget plugins using a local Ruby/Node/Yarn/Rake Environment
-
-1. yarn
-1. rake build VERSION=1.0.0
-
-## Building tool / widget plugins using Docker and the openc3-node container
-
-If you don’t have a local node environment, you can use our openc3-node container to build custom tools and custom widgets
-
-Mac / Linux:
-
-```
-docker run -it -v `pwd`:/openc3/local:z -w /openc3/local docker.io/openc3inc/openc3-node sh
-```
-
-Windows:
-
-```
-docker run -it -v %cd%:/openc3/local -w /openc3/local docker.io/openc3inc/openc3-node sh
-```
-
-1. yarn
-1. rake build VERSION=1.0.0
-
-## Installing into OpenC3 COSMOS
-
-1. Go to the OpenC3 Admin Tool, Plugins Tab
-1. Click the paperclip icon and choose your plugin.gem file
-1. Fill out plugin parameters
-1. Click Install
-
-## Contributing
-
-We encourage you to contribute to OpenC3!
-
-Contributing is easy.
-
-1. Fork the project
-2. Create a feature branch
-3. Make your changes
-4. Submit a pull request
-
-Before any contributions can be incorporated we do require all contributors to agree to a Contributor License Agreement
-
-This protects both you and us and you retain full rights to any code you write.
-
-## License
-
-This OpenC3 plugin is released under the MIT License. See [LICENSE.txt](LICENSE.txt)
